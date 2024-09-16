@@ -1,0 +1,49 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<form id="secret-password-form">
+    <h1>WHAT IS THE SECRET PASSWORD MOTHERFUCKER</h1>
+    <input id="password" type="password" placeholder="Enter secret password" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const secretPassword = "chola"; 
+    document.getElementById("secret-password-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const enteredPassword = document.getElementById("password").value;
+
+     
+      if (enteredPassword === secretPassword) {
+        try {
+          
+         const currentRoute = window.location.href;
+
+          const response = await fetch(currentRoute, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ membershipStatus: true }) 
+          });
+
+          if (response.ok) {
+            alert("Membership status updated successfully!");
+          } else {
+            alert("Failed to update membership status");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred while updating membership status");
+        }
+      } else {
+        alert("Wrong password, try again.");
+      }
+    });
+  </script>
+</html>

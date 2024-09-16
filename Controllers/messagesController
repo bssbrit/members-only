@@ -1,0 +1,10 @@
+const db = require("../db/queries")
+
+    const getAllMessages = async (req,res) => {
+    try {
+        const messages = await db.getAllMessages()
+        res.render("index", {messages:messages})
+    }
+    }
+
+    module.exports{getAllMessages}
